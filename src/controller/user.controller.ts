@@ -48,6 +48,18 @@ export async function userController(fastify: FastifyInstance, options: FastifyP
     }
   });
 
+fastify.post('/logout', async (request, reply) => {
+  reply
+    .clearCookie('token', {
+      httpOnly: true,
+      path: '/',
+      secure: false,
+      sameSite: 'lax',
+    })
+    .status(200)
+    .send({ message: 'Logged out' });
+});
+
   fastify.post<{
     Body: { email: string; password: string };
     }>('/users/login', async (request, reply) => {

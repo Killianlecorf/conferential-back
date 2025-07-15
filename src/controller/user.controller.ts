@@ -128,6 +128,15 @@ export async function userController(fastify: FastifyInstance, options: FastifyP
     }
   });
 
+    fastify.get('/isAuth', { preHandler: decodeJwt }, async (request, reply) => {
+    const currentUser = (request as any).user;
+    if (!currentUser) {
+        return reply.status(401).send({ authenticated: false });
+    }
+
+    return reply.status(200).send({ authenticated: true, userId: currentUser.id });
+    });
+
   fastify.get('/users', { preHandler: decodeJwt }, async (request, reply) => {
     const currentUser = (request as any).user;
     if (!currentUser) return reply.status(401).send();

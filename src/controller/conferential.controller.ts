@@ -56,7 +56,7 @@ export async function conferenceController(fastify: FastifyInstance, options: Fa
             await em.persistAndFlush(conf);
             await orm.close();
 
-            return reply.status(201).send({ message: 'Conference created', id: conf.id });
+            return reply.status(201).send(conf);
 
         } catch (error) {
             await orm.close();
@@ -287,7 +287,7 @@ export async function conferenceController(fastify: FastifyInstance, options: Fa
             await em.flush();
             await orm.close();
 
-            return reply.status(200).send({ message: 'User joined the conference' });
+            return reply.status(200).send(conf);
 
         } catch (error) {
             await orm.close();

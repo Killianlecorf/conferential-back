@@ -5,20 +5,18 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
 export async function decodeJwt(request: FastifyRequest, reply: FastifyReply) {
   try {
-    const authHeader = request.headers['authorization'];
-    if (!authHeader) {
-      return reply.status(401).send({ error: 'Authorization header missing' });
-    }
+    const token = request.cookies?.token;
 
-    const token = authHeader.split(' ')[1];
     if (!token) {
-      return reply.status(401).send({ error: 'Token missing' });
+      return reply.status(401).send({ error: 'Authorization token missing' });
     }
 
     const decoded = jwt.verify(token, JWT_SECRET);
+
     (request as any).user = decoded;
 
-  } catch (error) {
-    return reply.status(401).send({ error: 'Invalid or expired token' });
+  } catch (err) {
+    return reply.status(401).send({ error: 'Invalid token' });
   }
 }
+

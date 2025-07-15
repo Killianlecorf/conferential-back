@@ -91,10 +91,6 @@ export async function conferenceController(fastify: FastifyInstance, options: Fa
 
             await em.populate(conferences, ['conferentialUser']);
 
-
-            console.log(conferences);
-
-
             await orm.close();
 
             return reply.status(200).send(conferences.map(c => ({

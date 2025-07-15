@@ -65,16 +65,6 @@
           "length": 6,
           "mappedType": "datetime"
         },
-        "conferential_size": {
-          "name": "conferential_size",
-          "type": "int",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 10,
-          "mappedType": "integer"
-        },
         "slot_number": {
           "name": "slot_number",
           "type": "int",
@@ -231,6 +221,73 @@
       ],
       "checks": [],
       "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "conference_id": {
+          "name": "conference_id",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "conference_conferential_user",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "conference_conferential_user_pkey",
+          "columnNames": [
+            "conference_id",
+            "user_id"
+          ],
+          "composite": true,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "conference_conferential_user_conference_id_foreign": {
+          "constraintName": "conference_conferential_user_conference_id_foreign",
+          "columnNames": [
+            "conference_id"
+          ],
+          "localTableName": "public.conference_conferential_user",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.conference",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "conference_conferential_user_user_id_foreign": {
+          "constraintName": "conference_conferential_user_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "public.conference_conferential_user",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.user",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     }
   ],

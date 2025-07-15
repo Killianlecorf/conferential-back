@@ -1,6 +1,8 @@
 import {
-  Entity, PrimaryKey, Property, BeforeCreate
+  Entity, PrimaryKey, Property, BeforeCreate,
+  ManyToMany, Collection
 } from '@mikro-orm/core';
+import { User } from './User';
 
 @Entity()
 export class Conference {
@@ -22,8 +24,8 @@ export class Conference {
   @Property()
   date!: Date;
 
-  @Property({length: 10})
-  conferentialSize!: number;
+  @ManyToMany(() => User)
+  conferentialUser = new Collection<User>(this);
 
   @Property()
   slotNumber!: number;

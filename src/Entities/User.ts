@@ -1,6 +1,8 @@
 import {
-  Entity, PrimaryKey, Property
+  Collection,
+  Entity, ManyToMany, PrimaryKey, Property
 } from '@mikro-orm/core';
+import { Conference } from './Conferential';
 
 @Entity()
 export class User {
@@ -21,6 +23,9 @@ export class User {
 
   @Property()
   isAdmin: boolean = false;
+
+  @ManyToMany(() => Conference, conference => conference.conferentialUser)
+  conferences = new Collection<Conference>(this);
 
   @Property()
   createdAt: Date = new Date();

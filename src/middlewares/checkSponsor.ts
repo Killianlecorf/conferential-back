@@ -4,3 +4,5 @@ async function checkSponsor(request: any, reply: any) {
     return reply.status(403).send({ error: 'Access denied: you must be sponsor' });
   }
 }
+
+export default checkSponsor;

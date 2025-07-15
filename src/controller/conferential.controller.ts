@@ -3,6 +3,8 @@ import { MikroORM } from '@mikro-orm/core';
 import mikroOrmConfig from '../../database/mikro-orm.config';
 import { Conference } from '../Entities/Conferential';
 import { decodeJwt } from '../middlewares/decode';
+import checkAdmin from '../middlewares/checkAdmin';
+import checkSponsor from '../middlewares/checkSponsor';
 
 
 export async function conferenceController(fastify: FastifyInstance, options: FastifyPluginOptions) {

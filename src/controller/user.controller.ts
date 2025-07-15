@@ -50,7 +50,7 @@ export async function userController(fastify: FastifyInstance, options: FastifyP
 
   fastify.post<{
     Body: { email: string; password: string };
-  }>('/users/login', async (request, reply) => {
+    }>('/users/login', async (request, reply) => {
     const { email, password } = request.body;
     if (!email || !password) return reply.status(400).send({ error: 'Missing fields' });
 
@@ -58,28 +58,43 @@ export async function userController(fastify: FastifyInstance, options: FastifyP
     const em = orm.em.fork();
 
     try {
-      const user = await em.findOne(User, { email });
-      if (!user) {
+        const user = await em.findOne(User, { email });
+        if (!user) {
         await orm.close();
         return reply.status(401).send({ error: 'Invalid credentials' });
-      }
+        }
 
-      const valid = await bcrypt.compare(password, user.password);
-      if (!valid) {
+        const valid = await bcrypt.compare(password, user.password);
+        if (!valid) {
         await orm.close();
         return reply.status(401).send({ error: 'Invalid credentials' });
-      }
+        }
 
-      const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin, isSponsor: user.isSponsor }, JWT_SECRET, { expiresIn: '1h' });
-      await orm.close();
-      return reply.status(200).send({ token });
+        const token = jwt.sign(
+        { id: user.id, isAdmin: user.isAdmin, isSponsor: user.isSponsor },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+        );
+        await orm.close();
+
+        reply
+        .setCookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            path: '/',
+            maxAge: 3600
+        })
+        .status(200)
+        .send({ message: 'Logged in' });
 
     } catch (error) {
-      await orm.close();
-      fastify.log.error(error);
-      return reply.status(500).send();
+        await orm.close();
+        fastify.log.error(error);
+        return reply.status(500).send();
     }
-  });
+    });
+
 
   fastify.get('/users/current', { preHandler: decodeJwt }, async (request, reply) => {
     const currentUser = (request as any).user;

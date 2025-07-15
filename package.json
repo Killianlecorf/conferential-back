@@ -1,0 +1,53 @@
+{
+  "name": "conferential-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "migration:create": "mikro-orm migration:create",
+    "migration:up": "mikro-orm migration:up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Killianlecorf/conferential-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Killianlecorf/conferential-back/issues"
+  },
+  "homepage": "https://github.com/Killianlecorf/conferential-back#readme",
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@mikro-orm/migrations": "^6.4.16",
+    "@mikro-orm/postgresql": "^6.4.16",
+    "@mikro-orm/reflection": "^6.4.16",
+    "@mikro-orm/sqlite": "^6.4.16",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.0",
+    "fastify": "^5.4.0",
+    "fastify-cookie": "^5.6.1",
+    "jsonwebtoken": "^9.0.2",
+    "mikro-orm": "^6.4.16",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^6.4.16",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "tsConfigPath": "./database/tsconfig.orm.json",
+    "configPaths": [
+      "./database/mikro-orm.config.ts"
+    ]
+  }
+}

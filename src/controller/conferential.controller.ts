@@ -16,13 +16,12 @@ export async function conferenceController(fastify: FastifyInstance, options: Fa
       speakerName: string;
       speakerBio: string;
       date: string;
-      conferentialSize: number;
       slotNumber: number;
     };
   }>('/conferences', { preHandler: [decodeJwt, checkAdmin] }, async (request, reply) => {
-    const { title, description, speakerName, speakerBio, date, conferentialSize, slotNumber } = request.body;
+    const { title, description, speakerName, speakerBio, date, slotNumber } = request.body;
 
-    if (!title || !description || !speakerName || !speakerBio || !date || !conferentialSize || !slotNumber) {
+    if (!title || !description || !speakerName || !speakerBio || !date  || !slotNumber) {
       return reply.status(400).send({ error: 'Missing fields' });
     }
 
@@ -36,7 +35,7 @@ export async function conferenceController(fastify: FastifyInstance, options: Fa
       conf.speakerName = speakerName;
       conf.speakerBio = speakerBio;
       conf.date = new Date(date);
-      conf.conferentialSize = conferentialSize;
+      conf.conferentialSize = 10;
       conf.slotNumber = slotNumber;
 
       conf.setTimesFromSlot();

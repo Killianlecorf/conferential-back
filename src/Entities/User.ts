@@ -1,8 +1,6 @@
 import {
-  Entity, PrimaryKey, Property,
-  OneToMany, Collection
+  Entity, PrimaryKey, Property
 } from '@mikro-orm/core';
-import { Conference } from './Conferential';
 
 @Entity()
 export class User {

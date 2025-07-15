@@ -6,5 +6,6 @@ declare namespace NodeJS {
         DATABASE_PASS: string;
         DATABASE_HOST: string;
         DATABASE_PORT: string;
+        ALLOWED_ORIGIN: string; 
     }
 }

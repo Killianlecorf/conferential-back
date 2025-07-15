@@ -24,9 +24,6 @@ export class User {
   @Property()
   isAdmin: boolean = false;
 
-  @OneToMany(() => Conference, conf => conf.organizer)
-  conferences = new Collection<Conference>(this);
-
   @Property()
   createdAt: Date = new Date();
 

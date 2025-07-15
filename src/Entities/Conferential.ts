@@ -36,9 +36,6 @@ export class Conference {
   @Property()
   endDateTime!: Date;
 
-  @ManyToOne(() => User)
-  organizer!: User;
-
   @BeforeCreate()
   setTimesFromSlot() {
     const slots = [

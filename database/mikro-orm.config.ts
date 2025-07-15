@@ -8,8 +8,6 @@ import {
 
 config();
 
-console.log('DATABASE_HOST:', process.env.DATABASE_HOST);
-
 export default defineConfig({
     host: process.env.DATABASE_HOST,
     port: Number.parseInt(process.env.DATABASE_PORT!, 10),

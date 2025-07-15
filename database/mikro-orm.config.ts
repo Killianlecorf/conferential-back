@@ -6,9 +6,9 @@ import {
     Conference
 } from '../src/Entities';
 
-config({
-    path: __dirname + '/../.env'
-});
+config();
+
+console.log('DATABASE_HOST:', process.env.DATABASE_HOST);
 
 export default defineConfig({
     host: process.env.DATABASE_HOST,

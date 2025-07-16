@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y postgresql-client dos2unix
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .

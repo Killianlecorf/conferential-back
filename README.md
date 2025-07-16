@@ -45,14 +45,25 @@ docker compose up --build
 
 This will:
 
-Build the Docker image for the app
+- Build the Docker image for the app
 
-Start the PostgreSQL container
+- Start the PostgreSQL container
 
-Run the initialization script (init.sh)
+- Run the initialization script (init.sh)
 
-Apply the database migrations
+- Apply the database migrations
 
-Automatically create a default admin user
+- Automatically create a default admin user
 
-Start the Node.js server at http://localhost:8000
+- Start the Node.js server at http://localhost:8000
+
+
+# Admin Login
+Once the app is running, you can log in to the admin panel using:
+
+- Email: admin@admin.fr
+
+- Password: admin
+
+You can create a user account by registering ! 
+
